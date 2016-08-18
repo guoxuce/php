@@ -1,0 +1,59 @@
+1.下载php源码包http://www.php.net/downloads.php
+2.解压tar zxf php-5.3.27.tar.gz 版本可能不同
+3.创建用户useradd -s /sbin/nologin php-fpm
+4.配置编译参数
+ ./configure \
+--prefix=/usr/local/php \
+--with-config-file-path=/usr/local/php/etc \
+--enable-fpm \
+--with-fpm-user=php-fpm \
+--with-fpm-group=php-fpm \
+--with-mysql=/usr/local/mysql \
+--with-mysql-sock=/tmp/mysql.sock \
+--with-libxml-dir \
+--with-gd \
+--with-jpeg-dir \
+--with-png-dir \
+--with-freetype-dir \
+--with-iconv-dir \
+--with-zlib-dir \
+--with-mcrypt \
+--enable-soap \
+--enable-gd-native-ttf \
+--enable-ftp \
+--enable-mbstring \
+--enable-exif \
+--enable-zend-multibyte \
+--disable-ipv6 \
+--with-pear \
+--with-curl \
+--with-openssl
+
+5.编译 make
+6.安装 make install
+7.修改配置文件
+cp php.ini-production /usr/local/php/etc/php.ini  -----php配置文件
+cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm    -----启动脚本
+cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf  ---启动脚本配置文件
+8.检查脚本
+/usr/local/php/sbin/php-fpm -t
+9.加入系统服务
+chkconfig --add php-fpm
+chkconfig php-fpm on
+10.启动服务
+service php-fpm start
+
+
+
+
+
+
+可能出现的问题：
+1.
+checking for cURL in default path... not found 
+configure: error: Please reinstall the libcurl distribution -
+easy.h should be in /include/curl/
+
+其实就是curl的dev包没有安装, 解决方案:
+终端下
+# yum -y install curl-devel
