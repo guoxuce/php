@@ -137,3 +137,6 @@ php-cgi变更php.ini配置后，需重启php-cgi才能让新的php-ini生效，�
 同样，PHP-FPM也是用于调度管理PHP解析器php-cgi的管理程序。
 
 PHP-FPM通过生成新的子进程可以实现php.ini修改后的平滑重启。
+
+
+https://github.com/guoxuce/php/blob/master/update.png
