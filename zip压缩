@@ -1,0 +1,51 @@
+原文链接http://www.lvtao.net/dev/php_zip.html
+
+PHP ZipArchive是PHP自带的扩展类，可以轻松实现ZIP文件的压缩和解压，使用前首先要确保PHP ZIP扩展已经开启
+一、解压缩zip文件
+
+$zip=new ZipArchive;//新建一个ZipArchive的对象
+	if($zip->open('test.zip')===TRUE){
+	$zip->extractTo('images');//假设解压缩到在当前路径下images文件夹内
+	$zip->close();//关闭处理的zip文件
+}
+
+二、将文件压缩成zip文件
+
+$zip=new ZipArchive;
+if($zip->open('test.zip',ZipArchive::OVERWRITE)===TRUE){
+	$zip->addFile('image.txt');//假设加入的文件名是image.txt，在当前路径下
+	$zip->close();
+}
+
+三、文件追加内容添加到zip文件
+
+$zip=new ZipArchive;
+$res=$zip->open('test.zip',ZipArchive::CREATE);
+if($res===TRUE){
+	$zip->addFromString('test.txt','file content goes here');
+	$zip->close();
+	echo 'ok';
+}else{
+	echo 'failed';
+}
+
+四、将文件夹打包成zip文件
+
+function addFileToZip($path,$zip){
+	$handler=opendir($path); //打开当前文件夹由$path指定。
+	while(($filename=readdir($handler))!==false){
+		if($filename != "." && $filename != ".."){//文件夹文件名字为'.'和‘..’，不要对他们进行操作
+			if(is_dir($path."/".$filename)){// 如果读取的某个对象是文件夹，则递归
+				addFileToZip($path."/".$filename, $zip);
+			}else{ //将文件加入zip对象
+				$zip->addFile($path."/".$filename);
+			}
+		}
+	}
+	@closedir($path);
+}
+$zip=new ZipArchive();
+if($zip->open('images.zip', ZipArchive::OVERWRITE)=== TRUE){
+	addFileToZip('images/', $zip); //调用方法，对要打包的根目录进行操作，并将ZipArchive的对象传递给方法
+	$zip->close(); //关闭处理的zip文件
+}
