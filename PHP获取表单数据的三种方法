@@ -1,0 +1,23 @@
+转自http://blog.csdn.net/yeluxing/article/details/5892470
+
+PHP中获取表单数据的三种方法，及其差别之处如下所示
+
+表单部分代码：
+<form name="form1" method="post" action="">
+<input type="text" name="username">
+<input type="submit" name="Submit" value="提交">
+</form>
+
+获取表单：
+<?php
+echo ($HTTP_POST_VARS["username"]);
+echo ($_REQUEST["username"]);
+echo ($username);
+?>
+
+方法一是4.0以下版本常用的方法，而不管register_globals如何设置；
+方法二是4.2以上版本常用的方法，而不管register_globals如何设置；
+方法三是在php.ini设置register_globals = On 的时候才适用。
+
+补：
+$_REQUEST中间的内容实际上还是来源于$_GET $_POST $_COOKIE，缺点是无法判断变量到底来自于get post 还是cookie，对要求比较严格的场合不适用。 
