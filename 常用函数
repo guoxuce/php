@@ -98,3 +98,19 @@ Md5()
 Strrev()
 25.使用一个字符串分割另一个字符串,形成一个数组//把字符串变成数组
 Explode(“分隔符”,$str);
+
+
+
+预定义常量
+$GLOBALS  $_SERVER $_ENV  $_GET $_POST  $_FILES  $_COOKIE  $_SESSION $_REQUEST
+$_SERVER['PHP_SELF'];
+$_SERVER['argv'];
+$_SERVER['argc'];
+$_SERVER['SERVER_ADDR'];
+$_SERVER['REQUEST_METHOD'];
+$_SERVER['REQUEST_URI'];
+$_SERVER['HTTP_REFERER'];
+$_SERVER['HTTP_USER_AGENT'];
+$_SERVER['HTTP_HOST'];
+$_SERVER['REMOTE_ADDR'];
+$_SERVER['REMOTE_HOST'];
