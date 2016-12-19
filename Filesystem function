@@ -1,0 +1,72 @@
+basename — 返回路径中的文件名部分
+string basename ( string $path [, string $suffix ] )
+
+dirname — 返回路径中的目录部分
+string dirname ( string $path )
+
+fileatime — 取得文件的上次访问时间
+int fileatime ( string $filename )
+
+filectime — 取得文件的 inode 修改时间
+int filectime ( string $filename )
+
+chgrp — 改变文件所属的组
+bool chgrp ( string $filename , mixed $group )
+
+filegroup — 取得文件的组
+int filegroup ( string $filename )
+
+chown — 改变文件的所有者
+bool chown ( string $filename , mixed $user )
+
+chmod — 改变文件模式
+bool chmod ( string $filename , int $mode ) --八进制数字
+
+clearstatcache — 清除文件状态缓存
+void clearstatcache ([ bool $clear_realpath_cache = false [, string $filename ]] )
+
+diskfreespace — disk_free_space() 的别名
+disk_free_space — 返回目录中的可用空间
+float disk_free_space ( string $directory )
+
+disk_total_space — 返回一个目录的磁盘总大小
+float disk_total_space ( string $directory )
+
+copy — 拷贝文件
+bool copy ( string $source , string $dest [, resource $context ] )
+
+delete — 参见 unlink() 或 unset()
+
+fgetc — 从文件指针中读取字符
+string fgetc ( resource $handle )
+
+fgets — 从文件指针中读取一行
+string fgets ( resource $handle [, int $length ] )
+
+fgetss — 从文件指针中读取一行并过滤掉 HTML 标记
+string fgetss ( resource $handle [, int $length [, string $allowable_tags ]] )
+
+fgetcsv — 从文件指针中读入一行并解析 CSV 字段
+array fgetcsv ( resource $handle [, int $length = 0 [, string $delimiter = ',' [, string $enclosure = '"' [, string $escape = '\\' ]]]] )
+
+feof — 测试文件指针是否到了文件结束的位置
+bool feof ( resource $handle )
+
+
+fflush — 将缓冲内容输出到文件
+bool fflush ( resource $handle )
+
+fclose — 关闭一个已打开的文件指针
+bool fclose ( resource $handle )
+
+file — 把整个文件读入一个数组中
+array file ( string $filename [, int $flags = 0 [, resource $context ]] )
+
+file_get_contents — 将整个文件读入一个字符串
+string file_get_contents ( string $filename [, bool $use_include_path = false [, resource $context [, int $offset = -1 [, int $maxlen ]]]] )
+
+file_put_contents — 将一个字符串写入文件
+int file_put_contents ( string $filename , mixed $data [, int $flags = 0 [, resource $context ]] )
+
+file_exists — 检查文件或目录是否存在
+bool file_exists ( string $filename )
