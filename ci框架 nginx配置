@@ -1,0 +1,41 @@
+codeigniter修改
+
+对application/config/config.php进行修改，大约在48行左右。
+$config['uri_protocol'] = "PATH_INFO";
+
+修改nginx配置
+对nginx的进行配置，nginx.conf
+
+server {
+        listen       80;
+        listen [::]:80 ipv6only=on;
+        server_name  www.example.com;
+ 
+        root   /data/www/www.example.com;
+        index index.php  index.html index.htm;
+ 
+        location / {
+                # 这里使用try_files进行url重写，不用rewrite了。
+                try_files $uri $uri/ /index.php?$query_string;
+        }
+ 
+        location ~ \.php($|/) {
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+            fastcgi_split_path_info ^(.+\.php)(.*)$;
+            fastcgi_param   PATH_INFO $fastcgi_path_info;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+ 
+        location ~ /\.ht {
+                deny  all;
+        }
+}
+要特别注意19行的include fastcgi_params;，如果没有这一行，那么你的PHP程序会无法运行的。我被这个坑了很多次了。
+
+访问url
+
+在CI框架下，有一个默认的controller，叫welcome。
+原先在没有nginx的rewrite前，我们需要通过这样的方式访问http://www.example.com/index.php/welcome/index。
+现在我们可以http://www.example.com/welcome/index这样访问URL了。
